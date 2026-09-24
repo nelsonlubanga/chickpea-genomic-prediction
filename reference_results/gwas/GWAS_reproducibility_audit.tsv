@@ -1,0 +1,10 @@
+Item	Specification
+Marker discovery	BLINK in GAPIT 4.1.0
+Population structure	First three marker principal components
+Leakage prevention	GWAS repeated within every training fold; validation phenotypes excluded
+Across-environment evidence	Signed sample-size-weighted Stouffer meta-analysis
+Marker selection	Top 500 ranked meta-analysis SNPs
+Selected-marker model	BRR-shrunk random effects in E+L+G+GxE+S
+Proxy rule	Best tag within 500 kb only if r2 >= 0.5; duplicates collapsed
+GWAS plots	Manhattan and QQ PDF for every trait x CV x partition x fold
+Selection frequency	Reported across 10 partitions and 5 folds

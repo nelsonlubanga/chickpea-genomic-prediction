@@ -1,0 +1,26 @@
+Final analysis environment documented from logs and the revision workspace
+
+Command-line software
+- PLINK 1.90b6.21, 64-bit, build dated 19 October 2020
+- Haploview 4.1 (Tagger)
+- Java 19.0.1
+- Beagle 5.5 was used in historical exploratory phasing, but the final 190-accession panel workflow supplied here starts from the source VCF and does not require Beagle.
+- bcftools 1.19 was used for VCF inspection/preparation outside the final PLINK filtering command.
+
+Core R software observed in the revision environment
+- R 4.6.1
+- ASReml-R 4.2.0.482
+- BGLR 1.1.4
+- GAPIT 4.1.0 (GAPIT3 interface/BLINK implementation)
+- data.table 1.18.4
+- lme4 2.0-6
+- lmerTest 3.2-1
+- emmeans 2.0.4
+- ggplot2 4.0.3
+- writexl 2.0.0
+
+The full installed-package manifest and session information are supplied as
+R_package_versions.csv and sessionInfo.txt. Because the analysis was run on
+more than one system (local macOS and Linux HPC), the manifest documents the
+revision environment used to verify and package the final workflow; individual
+historical logs remain the authoritative record for external-binary versions.
