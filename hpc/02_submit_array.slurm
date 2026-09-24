@@ -29,4 +29,4 @@ export N_ITER=5000
 export BURN_IN=2000
 export THIN=5
 
-Rscript "$PROJECT_DIR/05_nested_meta_gwas_m4/01_fit_alemu_m4.R" "$partition" "$trait" "$cv"
+Rscript "$PROJECT_DIR/05_nested_meta_gwas_m4/01_fit_m4_exact_partitions.R" "$partition" "$trait" "$cv"
