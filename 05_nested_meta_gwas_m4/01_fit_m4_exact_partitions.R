@@ -1,13 +1,13 @@
 #!/usr/bin/env Rscript
 
 ## Alemu-inspired M4 extended to multi-environment GxE prediction.
-## Usage: Rscript 01_fit_alemu_m4.R <partition 1..10> <trait> <CV>
+## Usage: Rscript 01_fit_m4_exact_partitions.R <partition 1..10> <trait> <CV>
 ## Marker discovery is nested within each outer CV training set. Environment-
 ## specific BLINK results are combined by signed, sample-size-weighted Stouffer
 ## meta-analysis. The top K markers are fitted as a BRR (shrunk random) term.
 
 args <- commandArgs(trailingOnly = TRUE)
-if (length(args) != 3L) stop("Usage: Rscript 01_fit_alemu_m4.R <partition> <trait> <CV>")
+if (length(args) != 3L) stop("Usage: Rscript 01_fit_m4_exact_partitions.R <partition> <trait> <CV>")
 partition <- as.integer(args[1]); trait <- args[2]; cv_name <- args[3]
 traits <- c("DTF", "DTM", "HSW", "PH", "PPP", "YPPlnt")
 cv_names <- c("CV0", "CV1", "CV2", "CV00")
