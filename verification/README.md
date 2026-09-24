@@ -82,9 +82,9 @@ it was caught). Fixed by giving every call a unique `saveAt` prefix under
 the repository root, and the script completes fold-by-fold exactly as
 before.
 
-### 4. Nested meta-GWAS / M4 (`05_nested_meta_gwas_m4/01_fit_alemu_m4.R`)
+### 4. Nested meta-GWAS / M4 (`05_nested_meta_gwas_m4/01_fit_m4_exact_partitions.R`)
 
-The script as originally archived hardcoded `/scratch/$USER/alemu_tmp` as
+The script as originally archived hardcoded `/scratch/$USER/m4_tmp` as
 its temp-directory fallback, which does not exist off the original HPC
 cluster and causes an immediate `cannot change working directory` error.
 Fixed to fall back to `tempdir()` (see CHANGELOG). Re-run:
@@ -93,7 +93,7 @@ Fixed to fall back to `tempdir()` (see CHANGELOG). Re-run:
 export PROJECT_DIR=<project_dir_with_inputs_and_results>
 export TOP_K=500 MIN_PROXY_R2=0.5 LD_WINDOW_BP=500000
 export N_ITER=500 BURN_IN=200 THIN=5   # reduced from the production 5000/2000/5 to keep the spot-check tractable
-Rscript 05_nested_meta_gwas_m4/01_fit_alemu_m4.R 1 DTF CV1
+Rscript 05_nested_meta_gwas_m4/01_fit_m4_exact_partitions.R 1 DTF CV1
 ```
 
 Result: progresses correctly through real BLINK/GAPIT computation --

@@ -24,9 +24,9 @@ scratch_root <- Sys.getenv("SLURM_TMPDIR", unset = "")
 if (!nzchar(scratch_root)) {
   ## Fall back to a portable temp directory when not running under Slurm
   ## (e.g. a reviewer reproducing a single environment/fold locally). The
-  ## previous default (/scratch/$USER/alemu_tmp) is HPC-specific and does
+  ## previous default (/scratch/$USER/m4_tmp) is HPC-specific and does
   ## not exist on other machines, causing setwd() to fail outright.
-  scratch_root <- file.path(tempdir(), "alemu_tmp")
+  scratch_root <- file.path(tempdir(), "m4_tmp")
 }
 dir.create(scratch_root, recursive = TRUE, showWarnings = FALSE)
 top_k <- as.integer(Sys.getenv("TOP_K", unset = "500"))

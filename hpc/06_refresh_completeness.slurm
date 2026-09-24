@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=alemu_check
+#SBATCH --job-name=m4_check
 #SBATCH --partition=cpu
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=4G

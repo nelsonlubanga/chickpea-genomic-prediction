@@ -14,7 +14,7 @@ suppressPackageStartupMessages({library(BGLR);library(data.table)})
 project <- normalizePath(Sys.getenv("PROJECT_DIR",unset="."),mustWork=TRUE)
 input <- file.path(project,"inputs"); results <- file.path(project,"results")
 scratch <- Sys.getenv("SLURM_TMPDIR",unset="")
-if (!nzchar(scratch)) scratch <- file.path(tempdir(),"alemu_sensitivity_tmp")
+if (!nzchar(scratch)) scratch <- file.path(tempdir(),"m4_sensitivity_tmp")
 dir.create(scratch,recursive=TRUE,showWarnings=FALSE)
 n_iter <- 5000L; burn_in <- 2000L; thin <- 5L
 ks <- c(100L,1000L); ld_window <- 500000; min_r2 <- 0.5
