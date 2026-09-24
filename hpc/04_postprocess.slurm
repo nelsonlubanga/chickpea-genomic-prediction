@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=alemu_post
+#SBATCH --job-name=m4_post
 #SBATCH --partition=cpu
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=16G

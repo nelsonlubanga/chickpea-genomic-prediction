@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=alemu_m4
+#SBATCH --job-name=m4_fit
 #SBATCH --partition=cpu
 #SBATCH --array=1-240%24
 #SBATCH --cpus-per-task=2

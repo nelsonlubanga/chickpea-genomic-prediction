@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=alemu_sens
+#SBATCH --job-name=m4_sens
 #SBATCH --partition=cpu
 #SBATCH --array=1-240%120
 #SBATCH --cpus-per-task=1

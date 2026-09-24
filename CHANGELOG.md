@@ -42,18 +42,18 @@ panels before any indexing.
 190-accession, 1,710-observation structure, with eigenvalues correlating
 >0.998 with the officially supplied `inputs/step5_panels.rds`.
 
-### 3. `05_nested_meta_gwas_m4/01_fit_alemu_m4.R` and `08_fit_top100_top1000.R`
+### 3. `05_nested_meta_gwas_m4/01_fit_m4_exact_partitions.R` and `08_fit_top100_top1000.R`
 **Bug**: both scripts default `scratch_root` (or `scratch`) to
-`file.path("/scratch", Sys.getenv("USER"), "alemu_tmp")` when the
+`file.path("/scratch", Sys.getenv("USER"), "m4_tmp")` when the
 `SLURM_TMPDIR` environment variable is not set. `/scratch/$USER/...` is
 specific to the original HPC cluster and does not exist on any other
 machine, so `dir.create()` silently fails and the subsequent `setwd()`
 throws `cannot change working directory` immediately on the first
 environment of the first fold -- before any GWAS computation happens at
 all.
-**Fix**: fall back to `file.path(tempdir(), "alemu_tmp")` (or
-`"alemu_sensitivity_tmp"`), which is portable and works on any machine.
-**Verified**: `01_fit_alemu_m4.R` now runs past the previous crash point
+**Fix**: fall back to `file.path(tempdir(), "m4_tmp")` (or
+`"m4_sensitivity_tmp"`), which is portable and works on any machine.
+**Verified**: `01_fit_m4_exact_partitions.R` now runs past the previous crash point
 into genuine BLINK/GAPIT computation, confirmed via GAPIT's own runtime
 diagnostic output and successful completion of at least one full
 environment-level GWAS run (see `verification/m4_gwas_test_DTF_CV1_partition1/`).
@@ -72,7 +72,7 @@ repository root during verification.
 **Fix**: `fit_one()` now takes a `tag` argument and gives every BGLR call a
 unique `saveAt` prefix under `tempdir()`, deleting the trace files
 immediately after each fit (matching the pattern already used correctly in
-`05_nested_meta_gwas_m4/01_fit_alemu_m4.R` and `08_fit_top100_top1000.R`).
+`05_nested_meta_gwas_m4/01_fit_m4_exact_partitions.R` and `08_fit_top100_top1000.R`).
 **Verified**: re-run with the fix produces no stray files at the repository
 root and completes fold-by-fold as before.
 
