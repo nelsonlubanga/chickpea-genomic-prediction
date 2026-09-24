@@ -47,3 +47,17 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# Editor/Office lock files
+~$*
+*.swp
+
+# BGLR / ASReml trace and temp output -- these must be written under
+# tempdir() by every fitting script (see CHANGELOG.md items 2-4), but this
+# is kept as a safety net in case a future script defaults saveAt to the
+# working directory again
+*.dat

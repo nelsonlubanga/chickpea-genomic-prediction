@@ -1,0 +1,11 @@
+# Supplementary Figure S1
+
+`Supplementary_Figure_S1_representative_GWAS_plots.pdf` is a 24-page figure containing paired Manhattan and Q-Q plots for the fold-level meta-GWAS used to rank markers for model M4. The displayed analyses use repetition (partition) 1 and fold 1 for every combination of six traits and four cross-validation schemes. This subset was selected using a fixed, results-independent rule.
+
+Pages are ordered by trait (DTF, DTM, HSW, PH, PPP and YPP) and, within trait, by cross-validation scheme (CV1, CV2, CV0 and CV00). Each page contains the Manhattan plot on the left and Q-Q plot on the right.
+
+The source files use `YPPlnt` for yield per plant; this is displayed as YPP in the manuscript. The complete set of 1,200 fold-level plot PDFs remains in `/scratch/nel6/alemu/reviewer_outputs/gwas_plots/` and should be deposited separately on Figshare because it occupies approximately 22 GB.
+
+## Caption
+
+**Supplementary Figure S1. Representative Manhattan and quantile-quantile (Q-Q) plots from the fold-level meta-GWAS used for marker ranking in model M4.** Plots are shown for repetition 1, fold 1 for each combination of six traits (DTF, DTM, HSW, PH, PPP and YPP) and four cross-validation schemes (CV1, CV2, CV0 and CV00), giving 24 representative conditions. The subset was defined independently of the association results. Within each fold, GWAS was performed separately in the available training environments using training phenotypes only and controlling for population structure with the first three marker-derived principal components. Environment-specific association evidence was combined using a signed, sample-size-weighted Stouffer procedure. Manhattan plots show fold-level combined association probabilities across the eight chickpea chromosomes. The dashed red line is the Bonferroni family-wise threshold at 0.05 divided by the number of markers tested, and the dotted purple line is the 5% Benjamini-Hochberg false-discovery-rate threshold when markers passed that criterion. These lines are provided as reference thresholds; M4 used the top 500 ranked markers rather than requiring markers to pass either significance threshold. Q-Q plots compare observed and expected distributions of the combined probabilities. The complete set of 1,200 fold-level Manhattan and Q-Q plots is available in the accompanying Figshare repository.
