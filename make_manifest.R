@@ -8,6 +8,8 @@ files <- files[!grepl("(^|/)(FILE_MANIFEST.tsv|checksums_md5.tsv)$", files)]
 # Local staging copies of the 24 large vector PDFs are excluded. The compact,
 # assembled Supplementary Figure S1 and its page manifest are archived instead.
 files <- files[!grepl("(^|/)outputs/supplementary_figures/source_partition01_fold1/", files)]
+# git's own internal object store is not part of the archive's file inventory.
+files <- files[!grepl("(^|/)\\.git(/|$)", files)]
 info <- file.info(files)
 rel <- substring(files, nchar(root) + 2L)
 ext <- tools::file_ext(rel)
