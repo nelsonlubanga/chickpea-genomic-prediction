@@ -1,0 +1,1 @@
+trait=DTF environment=2015.Amlaha n=188 n_markers=409128 lambda_GC=1.086

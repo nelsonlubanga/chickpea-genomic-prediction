@@ -1,0 +1,5 @@
+Trait: DTF
+Environments used: 2015.Amlaha, 2015.Junagadh, 2015.Patancheru, 2015.Sehore, 2016.Amlaha, 2016.Junagadh, 2016.Kanpur, 2016.Patancheru, 2016.Sehore
+Total markers ranked: 409128
+Top-500 overlap between naive and correlation-aware ranking: 500 / 500 (100.0%)
+Spearman rank correlation (naive vs correlation-aware), all markers: 1.0000
