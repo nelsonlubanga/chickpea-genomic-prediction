@@ -3,8 +3,9 @@
 This archive was independently re-executed end-to-end (excluding stages that
 require the raw VCF, the raw plot-level phenotype file, or HPC access -- see
 `verification/README.md`). Four real bugs were found during that
-verification and fixed here. All three prevented the archive from running
-its own documented example commands; none change the reported analytical
+verification and fixed here. Two (items 2 and 3) crashed the archive's own
+documented example commands outright; the other two (items 1 and 4)
+silently produced missing or overwritten output. None change the reported analytical
 results, since the manuscript's numbers were generated before these
 scripts were archived in their broken state.
 

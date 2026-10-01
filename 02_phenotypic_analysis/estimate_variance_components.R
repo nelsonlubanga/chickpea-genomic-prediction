@@ -4,6 +4,9 @@ args <- commandArgs(trailingOnly = TRUE)
 input_file <- if (length(args) >= 1L) args[[1L]] else "inputs/second_stage_BLUEs_Y.csv"
 output_file <- if (length(args) >= 2L) args[[2L]] else
   "outputs/variance_components_heritability.csv"
+## Optional: full REML variance-component table (component, SE, z-ratio,
+## boundary status) and model log-likelihood for every trait.
+varcomp_file <- if (length(args) >= 3L) args[[3L]] else NA_character_
 if (!file.exists(input_file)) stop("Input file not found: ", input_file)
 dir.create(dirname(output_file), recursive = TRUE, showWarnings = FALSE)
 dat <- read.csv(input_file, stringsAsFactors = FALSE)
@@ -11,6 +14,7 @@ dat <- transform(dat, Genotype = factor(strain), year = factor(pwdyear),
                  location = factor(location), env = factor(env))
 traits <- c("DTF", "PH", "DTM", "PPP", "HSW", "YPPlnt")
 out <- list()
+full <- list()
 for (tr in traits) {
   d <- dat[, c("Genotype", "env", "year", "location", tr)]
   names(d)[5] <- "y"
@@ -37,7 +41,16 @@ for (tr in traits) {
     genetic_variance = vg, Gxsite_variance = vgs, Gxyear_variance = vgy,
     residual_variance = ve, mean_observations_per_genotype = nobs,
     sites = s, years = y, H2_entry_mean = h2)
+  full[[tr]] <- data.frame(trait = tr, term = rownames(vc),
+    vc[, c("component", "std.error", "z.ratio", "bound")],
+    pct_of_total = 100 * vc$component / sum(vc$component),
+    n_obs = nrow(d), n_lines = nlevels(droplevels(d$Genotype)),
+    logLik = fit$loglik, converged = fit$converge, row.names = NULL)
 }
 res <- do.call(rbind, out)
 write.csv(res, output_file, row.names = FALSE)
+if (!is.na(varcomp_file)) {
+  dir.create(dirname(varcomp_file), recursive = TRUE, showWarnings = FALSE)
+  write.csv(do.call(rbind, full), varcomp_file, row.names = FALSE)
+}
 print(res)

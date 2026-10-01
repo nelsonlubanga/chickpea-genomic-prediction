@@ -6,7 +6,7 @@ phenotype file, or an HPC cluster. It exists so a reviewer can confirm the
 code actually does what the manuscript and README claim, without having to
 run the full 10-repetition x 6-trait x 4-CV-scheme x 5-fold grid themselves.
 
-Three real bugs were found and fixed in the course of this verification
+Four real bugs were found and fixed in the course of this verification
 (see `../CHANGELOG.md` for details). Every result below reflects the
 **fixed** code, re-run and captured fresh.
 
@@ -124,6 +124,48 @@ All four steps (`validate_archive.R`, `06_statistical_analysis/01_test_models_an
 run to completion using only the files already in `reference_results/` and
 `inputs/` -- no external data or HPC access needed. Output file sizes match
 the deposited versions.
+
+### 6. Single-environment (pre-aggregation) GWAS Q-Q check
+
+```bash
+Rscript verification/run_single_environment_gwas_for_qq.R DTF 2015.Amlaha
+```
+
+Runs the same GAPIT/BLINK call as production (`PCA.total = 3`,
+`model = "BLINK"`, `Random.model = FALSE`) for one environment, without
+CV-fold masking, to show what one environment's association evidence looks
+like before the Stouffer combination used in Supplementary Figure S1.
+
+Result (`single_env_gwas_DTF_2015.Amlaha/`): n = 188 accessions, 409,128
+markers, genomic inflation factor **lambda_GC = 1.086**. Full results and the
+Q-Q plot are saved alongside `summary.txt`.
+
+### 7. Correlation-aware vs naive Stouffer re-ranking
+
+```bash
+Rscript verification/correlation_aware_reranking_check.R DTF .
+```
+
+Runs BLINK in each of the nine DTF environments on full (non-CV-masked)
+data. It then compares the production naive Stouffer statistic
+(denominator `sqrt(sum(w^2))`) with a correlation-aware version
+(denominator `sqrt(w' R w)`), where `R` is the between-environment
+phenotypic correlation matrix (`environment_phenotypic_correlation.csv`).
+
+Result (`correlation_aware_reranking_DTF/`): top-500 overlap 500/500,
+Spearman rank correlation 1.0000.
+
+**Limitation:** this agreement holds by construction, so it is not
+evidence of robustness. Every one of the 409,128 markers is tested in all
+nine environments with the same per-environment weights. The
+correlation-aware denominator is therefore the same constant for every
+marker, and `Z_corr` is exactly `0.4742 x Z_naive` throughout
+(checked directly from `naive_vs_correlation_aware_ranking.csv`). This
+uniform rescaling deflates the combined Z, so it changes the absolute
+`P_meta` values, but it cannot change the ranking. A check that could
+change the ranking would need marker-specific correlation structure, for
+example correlations of the test statistics estimated from null markers,
+or a multivariate or random-effects meta-analysis.
 
 ## What was not independently verified, and why
 

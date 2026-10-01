@@ -6,8 +6,8 @@ BLUE estimation, and cross-validation.
 
 **This pipeline has been independently re-executed end-to-end** (excluding
 stages that require the raw VCF, the raw plot-level phenotype file, or HPC
-access). Four bugs that broke the archive's own documented example commands
-were found and fixed in the process. See `CHANGELOG.md` for exactly what
+access). Four bugs that broke or silently corrupted the archive's own
+documented example commands were found and fixed in the process. See `CHANGELOG.md` for exactly what
 changed and why, and `verification/README.md` for the commands run, the
 real output produced, and honest disclosure of what could and could not be
 confirmed locally.
@@ -58,6 +58,7 @@ Validation phenotypes never contribute to GWAS discovery or marker ranking.
 | `inputs/` | Analysis-ready phenotypes, exact folds, kernels, genotype matrices, marker map, and tag list |
 | `reference_results/` | Final fold-level PA and summary/statistical outputs used for manuscript reporting |
 | `outputs/supplementary_figures/` | Supplementary Figure S1, its caption, and page manifest |
+| `verification/` | Independent re-execution checks, captured outputs, and reviewer-requested GWAS diagnostics (see `verification/README.md`) |
 
 See `DATA_DICTIONARY.md` for every abbreviation, code, and core output column.
 
@@ -110,6 +111,23 @@ can execute it: `plot_level_phenotypes.csv` (a file with `environment`,
 data holdings. The analysis-ready output of that upstream step -- the
 second-stage BLUEs actually used for every downstream analysis in this
 repository -- is supplied as `inputs/second_stage_BLUEs_Y.csv`.
+
+#### Across-environment variance components and heritability (Table 1)
+
+Fitted to the BLUEs of the 190 genotyped lines with ASReml-R: environment
+fixed; line, line x site and line x year random. Requires ASReml-R.
+
+```bash
+Rscript 02_phenotypic_analysis/estimate_variance_components.R \
+  verification/second_stage_BLUEs_Y_190_verification.csv \
+  reference_results/tables/Heritability_190.csv \
+  reference_results/tables/Variance_components_REML_190.csv
+```
+
+`Variance_components_REML_190.csv` holds the full REML output for each trait
+(component, standard error, z-ratio, boundary status, percentage of total
+variance, log-likelihood, convergence). `Heritability_190.csv` holds the
+entry-mean H² reported in Table 1.
 
 ### 4. Rebuild genomic kernels (optional)
 
