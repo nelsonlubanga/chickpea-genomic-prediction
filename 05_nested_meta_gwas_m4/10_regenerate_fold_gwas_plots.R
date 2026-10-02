@@ -1,12 +1,8 @@
 #!/usr/bin/env Rscript
 
-## Regenerate the fold-level meta-GWAS (GWAS stage of M4 only, no BGLR fits)
-## and its Manhattan/Q-Q plot for one partition x trait x CV x fold.
+## Rerun the GWAS stage of M4 (no model fits) for one fold: ranking, plots and
+## a check of the top 500 against selected_markers_all_folds.tsv.
 ## Usage: Rscript 10_regenerate_fold_gwas_plots.R <partition> <trait> <CV> <fold>
-## The fold masks, BLINK call and Stouffer meta-analysis are copied verbatim
-## from 01_fit_m4_exact_partitions.R; the plot code from
-## 03_gwas_plots_and_reviewer_tables.R. Each run also checks its top 500
-## against reference_results/gwas/selected_markers_all_folds.tsv.
 
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) != 4L) stop("Usage: Rscript 10_regenerate_fold_gwas_plots.R <partition> <trait> <CV> <fold>")
@@ -102,7 +98,7 @@ env_results <- lapply(envs, function(e) run_env_gwas(train_df,e,fold)); names(en
 ranking <- as.data.table(meta_rank(env_results)$ranking)
 fwrite(ranking, file.path(out_dir, "meta_analysis_ranking.csv.gz"))
 
-## ---- plot, as in 03_gwas_plots_and_reviewer_tables.R ----
+## ---- plot, as in 03_gwas_plots_and_tables.R ----
 d <- merge(ranking, as.data.table(GM_full), by="SNP", all.x=TRUE, sort=FALSE)
 setorder(d,P_meta,-N_environments,min_P,SNP)
 d[,FDR_meta:=p.adjust(P_meta,method="BH")]

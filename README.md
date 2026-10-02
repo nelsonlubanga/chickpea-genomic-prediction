@@ -58,7 +58,7 @@ Validation phenotypes never contribute to GWAS discovery or marker ranking.
 | `inputs/` | Analysis-ready phenotypes, exact folds, kernels, genotype matrices, marker map, and tag list |
 | `reference_results/` | Final fold-level PA and summary/statistical outputs used for manuscript reporting |
 | `outputs/supplementary_figures/` | Supplementary Figure S1, its caption, and page manifest |
-| `verification/` | Independent re-execution checks, captured outputs, and reviewer-requested GWAS diagnostics (see `verification/README.md`) |
+| `verification/` | Independent re-execution checks, captured outputs, and GWAS diagnostics (see `verification/README.md`) |
 
 See `DATA_DICTIONARY.md` for every abbreviation, code, and core output column.
 
@@ -196,7 +196,7 @@ Zenodo (see the Licence and citation section).
 ### 8. Regenerate supplementary tables
 
 The submission workbooks are built from the final fold-level PA, statistical
-outputs, and reviewer-facing meta-GWAS files. See
+outputs, and meta-GWAS files. See
 `08_supplementary_tables/01_build_supplementary_tables_S1_S5.R` and the README
 inside the deposited supplementary-table directory.
 
@@ -277,8 +277,7 @@ Haploview 4.1, and Java 19.0.1. ASReml-R is proprietary.
   and numerical outputs.
 - Two files in `reference_results/` are large (`Supplementary_Table_S5_GWAS_results_underlying_M4.xlsx`,
   ~64 MB, and `gwas/selected_markers_all_folds.tsv`, ~75 MB); both are kept
-  here (under GitHub's 100 MB hard limit) and are also included in the
-  Figshare snapshot of this repository cited below.
+  here (under GitHub's 100 MB hard limit).
 - See `verification/README.md` for exactly which parts of this pipeline have
   been independently re-executed and confirmed, and which parts (genotype QC
   from the raw VCF, within-environment BLUEs from the raw plot-level file,
@@ -298,9 +297,7 @@ Haploview 4.1, and Java 19.0.1. ASReml-R is proprietary.
 
 ## Licence and citation
 
-Please cite the associated manuscript and the Figshare snapshot of this
-repository: `https://doi.org/10.6084/m9.figshare.33311715`.
-
-The complete fold-level meta-GWAS results (full marker ranking and
+Please cite the associated manuscript. The complete fold-level results
+(predictions of M1-M4 for every validation record, the full marker ranking and
 Manhattan/Q-Q plots for all 1,200 folds) are deposited at Zenodo:
-[Zenodo DOI].
+https://doi.org/10.5281/zenodo.23100672.

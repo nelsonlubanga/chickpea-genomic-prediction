@@ -24,8 +24,7 @@ regex, anchored to avoid also matching `Genotype:location` etc).
 **Verified**: re-run on both the 209- and 190-genotype datasets now returns
 real heritability estimates matching the manuscript's Table 1 values
 (209-genotype run) and revealing the correction needed for the 190-genotype
-values that should have been reported (see the manuscript's response to
-Reviewer 2).
+values reported in the revised manuscript.
 
 ### 2. `03_relationship_matrices/01_build_kernels.R`
 **Bug**: crashed with `subscript out of bounds` when run exactly as
@@ -122,4 +121,4 @@ ASReml-R, PLINK, Haploview, and Java), would not compile on Linux or Windows,
 and nothing else in the repository referenced it. Its only output -- the
 assembled Figure S1 PDF -- is already present as a finished deliverable in
 `outputs/supplementary_figures/`, so its removal does not reduce what a
-reviewer can reproduce or inspect.
+reader can reproduce or inspect.

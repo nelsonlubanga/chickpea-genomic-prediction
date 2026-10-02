@@ -7,7 +7,7 @@ project <- normalizePath(Sys.getenv("PROJECT_DIR", unset = "."), mustWork = TRUE
 ## (or .csv.gz) for every fold.
 results_dir <- normalizePath(Sys.getenv("RESULTS_DIR", unset = file.path(project, "results")), mustWork = TRUE)
 map_file <- file.path(project, "inputs", "genome_wide_marker_map.tsv")
-out_dir <- Sys.getenv("OUT_DIR", unset = file.path(project, "reviewer_outputs", "Supplementary_Figure_S1_sources_with_thresholds"))
+out_dir <- Sys.getenv("OUT_DIR", unset = file.path(project, "gwas_outputs", "Supplementary_Figure_S1_sources_with_thresholds"))
 dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
 
 traits <- c("DTF", "DTM", "HSW", "PH", "PPP", "YPPlnt")
@@ -84,9 +84,7 @@ draw_pair <- function(d, pdat, display_trait, key) {
   abline(0, 1, col = "red", lwd = 1.5)
 }
 
-## Each page (Manhattan left, Q-Q right) is rendered as a 4800 x 1200 px PNG
-## and the PNGs are assembled into one PDF, so the figure stays a few tens of
-## MB instead of ~0.5 GB of vector points.
+## Pages (Manhattan left, Q-Q right) are rendered as PNG and assembled into one PDF.
 page_dir <- file.path(out_dir, "pages")
 dir.create(page_dir, recursive = TRUE, showWarnings = FALSE)
 
@@ -98,7 +96,7 @@ for (i in seq_along(ranking_files)) {
   d[, FDR_meta := p.adjust(P_meta, method = "BH")]
   pdat <- d[Chromosome %in% chr_order & is.finite(Position) & is.finite(P_meta)]
   pdat[, Chromosome := factor(Chromosome, levels = chr_order)]
-  ## keyby (not by): offsets must follow Ca1..Ca8, not the order of appearance.
+  ## keyby: lay out chromosomes Ca1..Ca8.
   chr_len <- pdat[, .(len = max(Position, na.rm = TRUE)), keyby = Chromosome]
   chr_len[, offset := shift(cumsum(len), fill = 0)]
   pdat <- merge(pdat, chr_len[, .(Chromosome, offset)], by = "Chromosome", sort = FALSE)

@@ -1,14 +1,7 @@
 #!/usr/bin/env Rscript
 
-## Supplementary Table S7: representation of the GWAS-ranked markers of M4 in
-## the haplotype-tagged panel.
-## Every top-500 marker selected in every fold of the primary analysis
-## (reference_results/gwas/selected_markers_all_folds.tsv) is classified with
-## the rule of map_to_tags() in 05_nested_meta_gwas_m4/01_fit_m4_exact_partitions.R:
-##   direct   - the marker is itself a tag SNP;
-##   proxy    - otherwise, the strongest tag SNP on the same chromosome within
-##              500 kb has r2 >= 0.5 with it (mean-imputed dosages, 190 lines);
-##   excluded - no tag SNP qualifies.
+## Supplementary Table S7: top-500 M4 markers classified as direct, proxy
+## (best tag within 500 kb, r2 >= 0.5) or excluded, as in map_to_tags() of M4.
 ## Usage: Rscript 08_supplementary_tables/02_build_table_S7_marker_composition.R [out.xlsx]
 
 suppressPackageStartupMessages({library(data.table); library(writexl)})

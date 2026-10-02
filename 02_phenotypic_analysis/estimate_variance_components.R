@@ -4,8 +4,7 @@ args <- commandArgs(trailingOnly = TRUE)
 input_file <- if (length(args) >= 1L) args[[1L]] else "inputs/second_stage_BLUEs_Y.csv"
 output_file <- if (length(args) >= 2L) args[[2L]] else
   "outputs/variance_components_heritability.csv"
-## Optional: full REML variance-component table (component, SE, z-ratio,
-## boundary status) and model log-likelihood for every trait.
+## Optional third argument: file for the full REML variance-component table.
 varcomp_file <- if (length(args) >= 3L) args[[3L]] else NA_character_
 if (!file.exists(input_file)) stop("Input file not found: ", input_file)
 dir.create(dirname(output_file), recursive = TRUE, showWarnings = FALSE)

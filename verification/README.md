@@ -2,7 +2,7 @@
 
 This directory documents an independent, from-scratch re-execution of every
 stage of this pipeline that does not require the raw VCF, the raw plot-level
-phenotype file, or an HPC cluster. It exists so a reviewer can confirm the
+phenotype file, or an HPC cluster. It exists so a reader can confirm the
 code actually does what the manuscript and README claim, without having to
 run the full 10-repetition x 6-trait x 4-CV-scheme x 5-fold grid themselves.
 

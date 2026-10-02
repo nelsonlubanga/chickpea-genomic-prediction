@@ -2,7 +2,7 @@
 suppressPackageStartupMessages(library(data.table))
 project <- normalizePath(Sys.getenv("PROJECT_DIR",unset="."),mustWork=TRUE)
 results <- file.path(project,"results")
-out <- file.path(project,"reviewer_outputs")
+out <- file.path(project,"gwas_outputs")
 parse_key <- function(f) {
   x <- strsplit(sub(paste0("^",results,"/?"),"",f),"/",fixed=TRUE)[[1]]
   data.table(Partition=as.integer(sub("partition_","",x[1])),Trait=x[2],CV=x[3],Fold=as.integer(sub("fold_","",x[4])))

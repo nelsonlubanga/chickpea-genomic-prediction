@@ -1,8 +1,6 @@
 #!/usr/bin/env Rscript
 
-## Redraw the Manhattan/Q-Q plots of one fold from its saved ranking
-## (meta_analysis_ranking.csv.gz in the fold folder),
-## without rerunning the GWAS. Overwrites the fold's .pdf and _1/_2.png.
+## Draw the Manhattan and Q-Q plots of one fold from its meta_analysis_ranking.csv.gz.
 ## Usage: Rscript 11_redraw_fold_gwas_plots.R <fold_dir> [<marker_map.tsv>]
 
 suppressPackageStartupMessages(library(data.table))

@@ -11,4 +11,4 @@ source /etc/profile
 module load R/R-4.6.1
 set -u
 : "${PROJECT_DIR:?Export PROJECT_DIR as the reproducibility archive path before sbatch}"
-Rscript "$PROJECT_DIR/05_nested_meta_gwas_m4/03_gwas_plots_and_reviewer_tables.R"
+Rscript "$PROJECT_DIR/05_nested_meta_gwas_m4/03_gwas_plots_and_tables.R"

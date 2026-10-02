@@ -1,12 +1,11 @@
 #!/usr/bin/env Rscript
 
-## Post-process completed Alemu-style folds into reviewer-facing GWAS evidence.
-## Run only after the Slurm prediction array has completed.
+## Fold-level GWAS plots and summary tables; run after the Slurm array has completed.
 
 suppressPackageStartupMessages(library(data.table))
 project <- normalizePath(Sys.getenv("PROJECT_DIR", unset="."), mustWork=TRUE)
 results <- file.path(project,"results")
-out <- file.path(project,"reviewer_outputs")
+out <- file.path(project,"gwas_outputs")
 dir.create(file.path(out,"gwas_plots"),recursive=TRUE,showWarnings=FALSE)
 map <- fread(file.path(project,"inputs","genome_wide_marker_map.tsv"))
 
@@ -93,4 +92,4 @@ expected <- CJ(Partition=1:10,Trait=c("DTF","DTM","HSW","PH","PPP","YPPlnt"),
                CV=c("CV0","CV1","CV2","CV00"),Fold=1:5,Panel=c("chr","tags"))
 missing <- fsetdiff(expected,unique(completeness[,.(Partition,Trait,CV,Fold,Panel)]))
 fwrite(missing,file.path(out,"M4_missing_expected_results.tsv"),sep="\t")
-cat("Created reviewer outputs in",out,"\n")
+cat("Created outputs in",out,"\n")

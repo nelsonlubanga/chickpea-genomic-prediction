@@ -1,22 +1,7 @@
 #!/usr/bin/env Rscript
 
-## Reviewer Point 5, third ask: does accounting for correlations among
-## environment-specific association statistics change marker ranking,
-## relative to the production pipeline's naive (independence-assuming)
-## signed sample-size-weighted Stouffer meta-analysis?
-##
-## Method: run the exact same per-environment BLINK GWAS as production
-## (PCA.total=3, model="BLINK", Random.model=FALSE) on the full (non-CV-
-## masked) training data for every environment with a record for one
-## representative trait. Compute the naive Stouffer Z_meta (as in
-## 05_nested_meta_gwas_m4/01_fit_m4_exact_partitions.R's meta_rank()), and a
-## correlation-aware version that uses the phenotypic correlation between
-## environments (estimated from the shared genotypes' real BLUEs) as a
-## proxy for the correlation between their association test statistics --
-## a standard approach when independent-sample GWAS replicates are not
-## available to estimate that correlation directly. Compare the resulting
-## top-500 marker rankings.
-##
+## Environment-level BLINK GWAS on the full data for one trait, and naive vs
+## correlation-adjusted Stouffer ranking (input for environment_qq_and_correlation_check.R).
 ## Usage: Rscript correlation_aware_reranking_check.R <trait> <project_dir>
 
 suppressPackageStartupMessages({library(GAPIT); library(data.table)})

@@ -1,23 +1,10 @@
 #!/usr/bin/env Rscript
 
-## Reviewer 2, Point 5: environment-specific (pre-aggregation) Q-Q plots, and
-## the effect of correlation among environments on the combined statistic.
-##
-## Input: per-environment BLINK results for one trait on the full data
-## (written by correlation_aware_reranking_check.R; same GAPIT call as M4).
-## For each SNP the M4 statistic is Z = sum(w z) / sqrt(sum(w^2)), w = sqrt(n).
-## Allowing for a correlation matrix R among environment-level z-scores gives
-## Z_R = sum(w z) / sqrt(w' R w). Every SNP is tested in the same environments
-## with the same weights, so Z_R = c * Z for a single constant c: the ranking,
-## and hence any top-k marker set, cannot change; only the calibration of P does.
-## R is estimated from markers with |z| < 2 in every environment (approximately
-## null markers); the phenotypic correlation between environments is shown for
-## comparison.
-##
+## Supplementary Figure S2: environment-specific Q-Q plots and the effect of
+## between-environment correlation on the combined statistic. All markers share
+## the same environments and weights, so the adjustment rescales Z uniformly and
+## leaves the ranking unchanged.
 ## Usage: Rscript environment_qq_and_correlation_check.R [trait] [project_dir]
-## Outputs (verification/environment_qq_<trait>/):
-##   Supplementary_Figure_S2_environment_QQ_<trait>.pdf / .png
-##   environment_qq_summary.csv, combined_statistic_summary.csv
 
 suppressPackageStartupMessages(library(data.table))
 args <- commandArgs(trailingOnly = TRUE)

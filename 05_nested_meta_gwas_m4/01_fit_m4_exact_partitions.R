@@ -22,10 +22,7 @@ input_dir <- file.path(project_dir, "inputs")
 out_root <- file.path(project_dir, "results")
 scratch_root <- Sys.getenv("SLURM_TMPDIR", unset = "")
 if (!nzchar(scratch_root)) {
-  ## Fall back to a portable temp directory when not running under Slurm
-  ## (e.g. a reviewer reproducing a single environment/fold locally). The
-  ## previous default (/scratch/$USER/m4_tmp) is HPC-specific and does
-  ## not exist on other machines, causing setwd() to fail outright.
+  ## Outside Slurm, use the R temporary directory.
   scratch_root <- file.path(tempdir(), "m4_tmp")
 }
 dir.create(scratch_root, recursive = TRUE, showWarnings = FALSE)
