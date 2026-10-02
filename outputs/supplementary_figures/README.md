@@ -6,11 +6,11 @@ Pages are ordered by trait (DTF, DTM, HSW, PH, PPP and YPP) and, within trait, b
 
 The source files use `YPPlnt` for yield per plant; this is displayed as YPP in the manuscript.
 
-The figure is built by `05_nested_meta_gwas_m4/04_make_supplementary_figure_S1.R`, which renders each page as a 4800 x 1200 px image and assembles the 24 pages into one PDF (`Supplementary_Figure_S1_page_manifest.tsv` lists the page order). The current version was built from the fold-level meta-analysis rankings regenerated with `10_regenerate_fold_gwas_plots.R`; for these 24 folds the regenerated top-500 marker sets are identical to those used for M4.
+The figure is built by `05_nested_meta_gwas_m4/04_make_supplementary_figure_S1.R`, which renders each page as a 4800 x 1200 px image and assembles the 24 pages into one PDF (`Supplementary_Figure_S1_page_manifest.tsv` lists the page order).
 
 **Correction (October 2026).** The version of this figure submitted with the first revision placed the chromosomes on the Manhattan x-axis in order of first appearance in the P-value-sorted results rather than Ca1-Ca8, while always labelling the positions Ca1-Ca8; chromosome labels were therefore misplaced. The plotting code now orders chromosomes Ca1-Ca8 (`keyby`) in scripts 03, 04, 10 and 11. Association statistics, marker rankings, the Q-Q plots and all M4 results were unaffected.
 
-The complete set of 1,200 fold-level Manhattan and Q-Q plots (all partitions and folds) was regenerated with the corrected code and is deposited with the fold-level meta-analysis rankings; see the main README.
+The complete set of 1,200 fold-level Manhattan and Q-Q plots (all partitions and folds), drawn with the corrected code, is deposited at Zenodo with the fold-level meta-analysis rankings; see the main README.
 
 ## Caption
 

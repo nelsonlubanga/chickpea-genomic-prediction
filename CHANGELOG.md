@@ -87,9 +87,10 @@ fold-level Manhattan plot, including the submitted Supplementary Figure S1,
 were therefore misplaced (and adjacent chromosomes could share a colour).
 **Fix**: `keyby = Chromosome`, which orders the groups Ca1-Ca8.
 **Verified**: Supplementary Figure S1 and all 1,200 fold-level plots were
-redrawn from the regenerated rankings (`10_regenerate_fold_gwas_plots.R`,
-`11_redraw_fold_gwas_plots.R`). Association statistics, rankings, Q-Q plots
-and all M4 results are unaffected; only the Manhattan x-axis changes.
+redrawn from the fold-level rankings with the corrected code
+(`04_make_supplementary_figure_S1.R`, `11_redraw_fold_gwas_plots.R`).
+Association statistics, rankings, Q-Q plots and all M4 results are unaffected;
+only the Manhattan x-axis changes.
 
 ## Also fixed (test correctness, not a pipeline bug)
 

@@ -3,8 +3,8 @@
 suppressPackageStartupMessages(library(data.table))
 
 project <- normalizePath(Sys.getenv("PROJECT_DIR", unset = "."), mustWork = TRUE)
-## RESULTS_DIR: HPC "results" tree, or the "regenerated_gwas" tree written by
-## 10_regenerate_fold_gwas_plots.R (rankings stored as .csv.gz).
+## RESULTS_DIR: folder holding partition_PP/TRAIT/CV/fold_F/meta_analysis_ranking.csv
+## (or .csv.gz) for every fold.
 results_dir <- normalizePath(Sys.getenv("RESULTS_DIR", unset = file.path(project, "results")), mustWork = TRUE)
 map_file <- file.path(project, "inputs", "genome_wide_marker_map.tsv")
 out_dir <- Sys.getenv("OUT_DIR", unset = file.path(project, "reviewer_outputs", "Supplementary_Figure_S1_sources_with_thresholds"))

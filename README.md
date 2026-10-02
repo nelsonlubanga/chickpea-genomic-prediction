@@ -189,11 +189,9 @@ CV schemes. The fixed selection rule, caption, and page order are documented in
 source PDFs used to assemble it are not included in this repository (each is
 ~19 MB; ~456 MB total) -- only the compact, already-assembled
 `Supplementary_Figure_S1_representative_GWAS_plots.pdf` is kept here. The
-complete set of 1,200 fold-level plot PDFs (all partitions, all folds;
-approximately 22 GB) is not deposited. It can be regenerated from the
-fold-level meta-analysis rankings with
-`05_nested_meta_gwas_m4/03_gwas_plots_and_reviewer_tables.R` after running
-step 6, and is available from the authors on request.
+complete set of 1,200 fold-level Manhattan and Q-Q plots (all partitions and
+folds), together with the full marker ranking of every fold, is deposited at
+Zenodo (see the Licence and citation section).
 
 ### 8. Regenerate supplementary tables
 
@@ -215,13 +213,12 @@ which reproduces the submitted counts exactly (~20 minutes).
 
 ### 9. Fold-level meta-GWAS results and Supplementary Figure S2
 
-`05_nested_meta_gwas_m4/10_regenerate_fold_gwas_plots.R` reruns the GWAS
-stage of M4 for one fold (no BGLR fits) and writes the full marker ranking,
-its Manhattan/Q-Q plots and a check against the deposited top 500. All 1,200
-folds were regenerated this way; the rankings and plots are deposited at
-Zenodo (see the Licence and citation section), and 1,192 of 1,200 folds
-reproduce the original top-500 marker set exactly.
-`11_redraw_fold_gwas_plots.R` redraws a fold's plots from its saved ranking.
+The full marker ranking of every fold (`meta_analysis_ranking.csv`, written by
+`05_nested_meta_gwas_m4/01_fit_m4_exact_partitions.R`) and its Manhattan and
+Q-Q plots are deposited at Zenodo (see the Licence and citation section).
+`11_redraw_fold_gwas_plots.R` draws a fold's plots from its ranking, and
+`10_regenerate_fold_gwas_plots.R` reruns the GWAS stage of M4 for one fold
+without the model fits.
 
 Supplementary Figure S2 (environment-specific Q-Q plots before aggregation,
 and the effect of between-environment correlation on the combined statistic)
