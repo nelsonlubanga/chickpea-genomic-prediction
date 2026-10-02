@@ -32,7 +32,7 @@ for (i in seq_along(ranking_files)) {
   chr_order <- paste0("Ca",1:8)
   pdat <- d[Chromosome %in% chr_order & is.finite(Position) & is.finite(P_meta)]
   pdat[,Chromosome:=factor(Chromosome,levels=chr_order)]
-  chr_len <- pdat[,.(len=max(Position,na.rm=TRUE)),by=Chromosome]
+  chr_len <- pdat[,.(len=max(Position,na.rm=TRUE)),keyby=Chromosome]  # keyby: lay out Ca1..Ca8 in order
   chr_len[,offset:=shift(cumsum(len),fill=0)]
   pdat <- merge(pdat,chr_len[,.(Chromosome,offset)],by="Chromosome",sort=FALSE)
   pdat[,x:=Position+offset]
@@ -40,7 +40,7 @@ for (i in seq_along(ranking_files)) {
   plot(pdat$x,-log10(pmax(pdat$P_meta,.Machine$double.xmin)),pch=20,cex=.28,
        col=cols[as.integer(pdat$Chromosome)],xaxt="n",xlab="Chromosome",ylab=expression(-log[10](italic(P))),
        main=sprintf("%s %s partition %d fold %d: meta-GWAS",key$Trait,key$CV,key$Partition,key$Fold))
-  axis(1,at=pdat[,mean(range(x)),by=Chromosome]$V1,labels=chr_order)
+  axis(1,at=pdat[,mean(range(x)),keyby=Chromosome]$V1,labels=chr_order)
   bonf_p <- 0.05 / sum(is.finite(d$P_meta))
   abline(h=-log10(bonf_p),col="#D7301F",lty=2,lwd=1.5)
   bh_pass <- d[is.finite(P_meta) & FDR_meta <= 0.05, P_meta]

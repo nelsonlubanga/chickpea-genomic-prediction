@@ -6,7 +6,7 @@ phenotype file, or an HPC cluster. It exists so a reviewer can confirm the
 code actually does what the manuscript and README claim, without having to
 run the full 10-repetition x 6-trait x 4-CV-scheme x 5-fold grid themselves.
 
-Four real bugs were found and fixed in the course of this verification
+Five real bugs were found and fixed in the course of this verification
 (see `../CHANGELOG.md` for details). Every result below reflects the
 **fixed** code, re-run and captured fresh.
 

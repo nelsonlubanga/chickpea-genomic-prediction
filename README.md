@@ -6,7 +6,7 @@ BLUE estimation, and cross-validation.
 
 **This pipeline has been independently re-executed end-to-end** (excluding
 stages that require the raw VCF, the raw plot-level phenotype file, or HPC
-access). Four bugs that broke or silently corrupted the archive's own
+access). Five bugs that broke or silently corrupted the archive's own
 documented example commands were found and fixed in the process. See `CHANGELOG.md` for exactly what
 changed and why, and `verification/README.md` for the commands run, the
 real output produced, and honest disclosure of what could and could not be
@@ -52,7 +52,7 @@ Validation phenotypes never contribute to GWAS discovery or marker ranking.
 | `05_nested_meta_gwas_m4/` | Final nested BLINK/meta-GWAS M4, sensitivity models, GWAS audit, and completeness checks |
 | `06_statistical_analysis/` | Fold-level PA compilation and mixed-model comparisons |
 | `07_figures/` | Final manuscript PA figures |
-| `08_supplementary_tables/` | Supplementary Tables S1-S5 builder |
+| `08_supplementary_tables/` | Supplementary Tables S1-S5 and S7 builders |
 | `09_environment/` | Software versions, R package versions, and requirement checker |
 | `hpc/` | Slurm submission templates used on the HPC |
 | `inputs/` | Analysis-ready phenotypes, exact folds, kernels, genotype matrices, marker map, and tag list |
@@ -189,9 +189,11 @@ CV schemes. The fixed selection rule, caption, and page order are documented in
 source PDFs used to assemble it are not included in this repository (each is
 ~19 MB; ~456 MB total) -- only the compact, already-assembled
 `Supplementary_Figure_S1_representative_GWAS_plots.pdf` is kept here. The
-complete set of 1,200 fold-level plot PDFs (all partitions, all folds) is
-maintained separately because it occupies approximately 22 GB; both are
-available from the Figshare record cited below.
+complete set of 1,200 fold-level plot PDFs (all partitions, all folds;
+approximately 22 GB) is not deposited. It can be regenerated from the
+fold-level meta-analysis rankings with
+`05_nested_meta_gwas_m4/03_gwas_plots_and_reviewer_tables.R` after running
+step 6, and is available from the authors on request.
 
 ### 8. Regenerate supplementary tables
 
@@ -199,6 +201,31 @@ The submission workbooks are built from the final fold-level PA, statistical
 outputs, and reviewer-facing meta-GWAS files. See
 `08_supplementary_tables/01_build_supplementary_tables_S1_S5.R` and the README
 inside the deposited supplementary-table directory.
+
+Table S6 (variance components) is produced by
+`02_phenotypic_analysis/estimate_variance_components.R` (see step 3). Table S7
+(representation of the M4 markers in the haplotype-tagged panel) is rebuilt
+from the deposited top-500 selections with:
+
+```bash
+Rscript 08_supplementary_tables/02_build_table_S7_marker_composition.R
+```
+
+which reproduces the submitted counts exactly (~20 minutes).
+
+### 9. Fold-level meta-GWAS results and Supplementary Figure S2
+
+`05_nested_meta_gwas_m4/10_regenerate_fold_gwas_plots.R` reruns the GWAS
+stage of M4 for one fold (no BGLR fits) and writes the full marker ranking,
+its Manhattan/Q-Q plots and a check against the deposited top 500. All 1,200
+folds were regenerated this way; the rankings and plots are deposited at
+Zenodo (see the Licence and citation section), and 1,192 of 1,200 folds
+reproduce the original top-500 marker set exactly.
+`11_redraw_fold_gwas_plots.R` redraws a fold's plots from its saved ranking.
+
+Supplementary Figure S2 (environment-specific Q-Q plots before aggregation,
+and the effect of between-environment correlation on the combined statistic)
+is produced by `verification/environment_qq_and_correlation_check.R`.
 
 To compile new prediction files into the fold-level PA structure used by all
 reporting scripts, run:
@@ -234,8 +261,8 @@ Haploview 4.1, and Java 19.0.1. ASReml-R is proprietary.
 
 ## Reproducibility boundaries
 
-- The raw VCF is not duplicated here for size reasons and must be obtained
-  from the associated data deposit.
+- The raw VCF is not duplicated here. The whole-genome sequence data were
+  obtained from Varshney et al. (2021) and are available from that study.
 - The raw, plot-level phenotype file (with block assignments) is not simply
   omitted from this archive -- this team never held it. ICRISAT ran the
   within-environment BLUE model (line fixed, block random; see
@@ -253,8 +280,8 @@ Haploview 4.1, and Java 19.0.1. ASReml-R is proprietary.
   and numerical outputs.
 - Two files in `reference_results/` are large (`Supplementary_Table_S5_GWAS_results_underlying_M4.xlsx`,
   ~64 MB, and `gwas/selected_markers_all_folds.tsv`, ~75 MB); both are kept
-  here (under GitHub's 100 MB hard limit) but are also available from the
-  Figshare record below if a mirror is preferred.
+  here (under GitHub's 100 MB hard limit) and are also included in the
+  Figshare snapshot of this repository cited below.
 - See `verification/README.md` for exactly which parts of this pipeline have
   been independently re-executed and confirmed, and which parts (genotype QC
   from the raw VCF, within-environment BLUEs from the raw plot-level file,
@@ -274,5 +301,9 @@ Haploview 4.1, and Java 19.0.1. ASReml-R is proprietary.
 
 ## Licence and citation
 
-Please cite the associated manuscript and Figshare record:
-`https://doi.org/10.6084/m9.figshare.33043046`.
+Please cite the associated manuscript and the Figshare snapshot of this
+repository: `https://doi.org/10.6084/m9.figshare.33311715`.
+
+The complete fold-level meta-GWAS results (full marker ranking and
+Manhattan/Q-Q plots for all 1,200 folds) are deposited at Zenodo:
+[Zenodo DOI].

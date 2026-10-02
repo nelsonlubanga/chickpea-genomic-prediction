@@ -2,12 +2,13 @@
 
 This archive was independently re-executed end-to-end (excluding stages that
 require the raw VCF, the raw plot-level phenotype file, or HPC access -- see
-`verification/README.md`). Four real bugs were found during that
+`verification/README.md`). Five real bugs were found during that
 verification and fixed here. Two (items 2 and 3) crashed the archive's own
-documented example commands outright; the other two (items 1 and 4)
-silently produced missing or overwritten output. None change the reported analytical
-results, since the manuscript's numbers were generated before these
-scripts were archived in their broken state.
+documented example commands outright; two (items 1 and 4) silently
+produced missing or overwritten output; and one (item 5) mislabelled the
+chromosomes on the Manhattan plots, including Supplementary Figure S1. None
+change the reported analytical results, since the manuscript's numbers were
+generated before these scripts were archived in their broken state.
 
 ## Fixed
 
@@ -76,6 +77,19 @@ immediately after each fit (matching the pattern already used correctly in
 `05_nested_meta_gwas_m4/01_fit_m4_exact_partitions.R` and `08_fit_top100_top1000.R`).
 **Verified**: re-run with the fix produces no stray files at the repository
 root and completes fold-by-fold as before.
+
+### 5. Manhattan plot chromosome order (`05_nested_meta_gwas_m4/03_*.R`, `04_*.R`)
+**Bug**: the per-chromosome offsets and axis-label positions were computed
+with `by = Chromosome` on data sorted by `P_meta`, so chromosomes were laid
+out in order of first appearance in the ranking rather than Ca1-Ca8, while
+the axis labels were always written Ca1-Ca8. Chromosome labels on every
+fold-level Manhattan plot, including the submitted Supplementary Figure S1,
+were therefore misplaced (and adjacent chromosomes could share a colour).
+**Fix**: `keyby = Chromosome`, which orders the groups Ca1-Ca8.
+**Verified**: Supplementary Figure S1 and all 1,200 fold-level plots were
+redrawn from the regenerated rankings (`10_regenerate_fold_gwas_plots.R`,
+`11_redraw_fold_gwas_plots.R`). Association statistics, rankings, Q-Q plots
+and all M4 results are unaffected; only the Manhattan x-axis changes.
 
 ## Also fixed (test correctness, not a pipeline bug)
 

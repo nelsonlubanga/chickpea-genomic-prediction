@@ -1,0 +1,4 @@
+trait,statistic,mean_between_env_correlation,scale_factor_vs_naive,lambda_GC,n_P_below_5e8,spearman_rank_vs_naive,top500_overlap_vs_naive
+DTF,naive Stouffer (used in M4),0,1,3.313,1708,1,500
+DTF,correlation-adjusted: null-marker z correlation,0.204,0.6165,1.259,4,1,500
+DTF,correlation-adjusted: phenotypic correlation,0.431,0.4742,0.745,0,1,500
