@@ -52,7 +52,7 @@ Validation phenotypes never contribute to GWAS discovery or marker ranking.
 | `05_nested_meta_gwas_m4/` | Final nested BLINK/meta-GWAS M4, sensitivity models, GWAS audit, and completeness checks |
 | `06_statistical_analysis/` | Fold-level PA compilation and mixed-model comparisons |
 | `07_figures/` | Final manuscript PA figures |
-| `08_supplementary_tables/` | Supplementary Tables S1-S5 and S7 builders |
+| `08_supplementary_tables/` | Supplementary Tables S1, S2 and S4-S7 builders |
 | `09_environment/` | Software versions, R package versions, and requirement checker |
 | `hpc/` | Slurm submission templates used on the HPC |
 | `inputs/` | Analysis-ready phenotypes, exact folds, kernels, genotype matrices, marker map, and tag list |
@@ -197,16 +197,16 @@ Zenodo (see the Licence and citation section).
 
 The submission workbooks are built from the final fold-level PA, statistical
 outputs, and meta-GWAS files. See
-`08_supplementary_tables/01_build_supplementary_tables_S1_S5.R` and the README
+`08_supplementary_tables/01_build_supplementary_tables.R` and the README
 inside the deposited supplementary-table directory.
 
-Table S6 (variance components) is produced by
-`02_phenotypic_analysis/estimate_variance_components.R` (see step 3). Table S7
+Table S3 (variance components) is produced by
+`02_phenotypic_analysis/estimate_variance_components.R` (see step 3). Table S2
 (representation of the M4 markers in the haplotype-tagged panel) is rebuilt
 from the deposited top-500 selections with:
 
 ```bash
-Rscript 08_supplementary_tables/02_build_table_S7_marker_composition.R
+Rscript 08_supplementary_tables/02_build_table_S2_marker_composition.R
 ```
 
 which reproduces the submitted counts exactly (~20 minutes).
@@ -275,7 +275,7 @@ Haploview 4.1, and Java 19.0.1. ASReml-R is proprietary.
 - Large stochastic refits may show negligible Monte Carlo variation, while the
   included fold assignments and reference results preserve the reported design
   and numerical outputs.
-- Two files in `reference_results/` are large (`Supplementary_Table_S5_GWAS_results_underlying_M4.xlsx`,
+- Two files in `reference_results/` are large (`Supplementary_Table_S1_GWAS_results_underlying_M4.xlsx`,
   ~64 MB, and `gwas/selected_markers_all_folds.tsv`, ~75 MB); both are kept
   here (under GitHub's 100 MB hard limit).
 - See `verification/README.md` for exactly which parts of this pipeline have
@@ -289,11 +289,13 @@ Haploview 4.1, and Java 19.0.1. ASReml-R is proprietary.
 |---|---|
 | Figures 2-5 | `07_figures/01_make_final_pa_plots.R` and top-500 fold-level PA |
 | Supplementary Figure S1 | Representative repetition-1/fold-1 fold-level meta-GWAS Manhattan and Q-Q plots |
-| Table S1 | Top-500 fold-level and summary PA |
-| Table S2 | Top-100 sensitivity PA |
-| Table S3 | Top-1,000 sensitivity PA |
+| Table S1 | Fold-specific top-500 meta-GWAS rankings and selection frequencies |
+| Table S2 | Representation of the top-500 M4 markers in the haplotype-tagged panel |
+| Table S3 | Variance components and heritability |
 | Table S4 | Primary top-500 mixed-model and panel comparisons |
-| Table S5 | Fold-specific top-500 meta-GWAS rankings and selection frequencies |
+| Table S5 | Top-500 fold-level and summary PA |
+| Table S6 | Top-100 sensitivity PA |
+| Table S7 | Top-1,000 sensitivity PA |
 
 ## Licence and citation
 

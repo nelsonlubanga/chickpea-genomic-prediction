@@ -120,7 +120,7 @@ bash 00_run_reporting_workflow.sh
 ```
 
 All four steps (`validate_archive.R`, `06_statistical_analysis/01_test_models_and_panels.R`,
-`07_figures/01_make_final_pa_plots.R`, `08_supplementary_tables/01_build_supplementary_tables_S1_S5.R`)
+`07_figures/01_make_final_pa_plots.R`, `08_supplementary_tables/01_build_supplementary_tables.R`)
 run to completion using only the files already in `reference_results/` and
 `inputs/` -- no external data or HPC access needed. Output file sizes match
 the deposited versions.
