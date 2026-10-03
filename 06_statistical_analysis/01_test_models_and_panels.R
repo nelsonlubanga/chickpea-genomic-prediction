@@ -73,8 +73,9 @@ pc_pw <- data.frame(Trait=fix_trait(pc_p$Trait),CV=pc_p$CV,Model=fix_model(pc_p$
   `t-ratio`=round(pc_p$t.ratio,4),`p-value`=pc_p$p.value,check.names=FALSE)
 pc_pw<-ord(pc_pw,"Model")
 
+analysis <- if (top_n == 500) "Primary top-500 analysis" else sprintf("Top-%d marker-set sensitivity analysis", top_n)
 readme <- data.frame(
-  col1=c(sprintf("Top-%d sensitivity analysis: statistical comparison of predictive ability among M1, M2, M3 and M4-%d and between marker panels, by trait and cross-validation scheme.",top_n,top_n),NA,
+  col1=c(sprintf("%s: statistical comparison of predictive ability among M1, M2, M3 and M4-%d and between marker panels, by trait and cross-validation scheme.",analysis,top_n),NA,
          "Sheet","Model_comparison_omnibus","Model_comparison_pairwise","Panel_comparison_omnibus","Panel_comparison_pairwise",NA,
          "Statistical model","M4 specification","Predictive ability","Pairwise contrasts"),
   col2=c(NA,NA,"Contents",sprintf("Omnibus F-test among M1, M2, M3 and M4-%d per trait x CV x panel.",top_n),
@@ -86,7 +87,7 @@ readme <- data.frame(
          "Within-environment Pearson correlations for environments with at least five validation observations, averaged equally within fold.",
          "emmeans; Tukey adjustment for six model contrasts and no additional adjustment for the single panel contrast."),
   check.names=FALSE)
-names(readme)<-c(sprintf("Top-%d marker-set sensitivity analysis",top_n),"")
+names(readme)<-c(if (top_n == 500) "Supplementary Table S4. Statistical comparisons of predictive ability among models and between marker panels (primary top-500 analysis)" else analysis,"")
 
 write_xlsx(list(README=readme,Model_comparison_omnibus=mc_om,
   Model_comparison_pairwise=mc_pw,Panel_comparison_omnibus=pc_om,
